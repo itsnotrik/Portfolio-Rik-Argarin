@@ -1,0 +1,750 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Portfolio</title>
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
+  <!-- Font Awesome (for icons) -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <style>
+    :root {
+      --primary: #111827;
+      --secondary: #1F2937;
+      --accent: #3B82F6;
+      --text: #F9FAFB;
+      --muted: #9CA3AF;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: var(--primary);
+      color: var(--text);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    /* Hero Section Styles */
+    .hero {
+      width: 100%;
+      height: 100vh;
+      background-image: url('https://images.unsplash.com/photo-1555066931-4365d14bab8c?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
+      background-size: cover;
+      background-position: center;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      color: var(--text);
+      position: relative;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.5);
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 1;
+      max-width: 800px;
+      padding: 0 20px;
+    }
+
+    .hero h1 {
+      font-size: 3.5rem;
+      margin-bottom: 1rem;
+      color: var(--accent);
+    }
+
+    .hero p {
+      font-size: 1.2rem;
+      margin-bottom: 2rem;
+      color: var(--muted);
+    }
+
+    .hero-buttons {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .hero:hover .hero-buttons {
+      opacity: 1;
+    }
+
+    .hero-buttons a {
+      display: inline-block;
+      padding: 0.75rem 1.5rem;
+      background-color: var(--accent);
+      color: white;
+      text-decoration: none;
+      border-radius: 8px;
+      font-weight: bold;
+      transition: background-color 0.3s;
+    }
+
+    .hero-buttons a:hover {
+      background-color: #2563eb;
+    }
+
+    /* Main Content Styles */
+    main {
+      width: 100%;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 2rem;
+      text-align: center;
+    }
+
+    h1 {
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+      color: var(--accent);
+    }
+
+    .cards-container {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      flex-wrap: wrap;
+      margin-top: 2rem;
+      margin-bottom: 2rem;
+    }
+    
+
+    .card {
+      background-color: var(--secondary);
+      border-radius: 8px;
+      padding: 1.5rem;
+      width: 250px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      transition: transform 0.3s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 0 15px var(--accent);
+    }
+
+    .card i {
+      color: var(--accent);
+      margin-bottom: 1rem;
+    }
+
+    .card h3 {
+      margin-bottom: 0.705rem;
+      color: #fff;
+    }
+
+    .card p {
+      color: var(--muted);
+      font-size: 0.9rem;
+      line-height: 1.5;
+    }
+
+    footer {
+      text-align: center;
+      padding: 1rem;
+      font-size: 0.85rem;
+      color: var(--muted);
+      background-color: var(--secondary);
+      margin-top: auto;
+      width: 100%;
+    }
+
+    /* Technical Skills Styles */
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 1rem;
+    }
+
+    .skill-card {
+      background-color: var(--secondary);
+      padding: 1.5rem;
+      border-radius: 8px;
+      text-align: left;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+      transition: box-shadow 0.3s ease;
+    }
+
+    .skill-card:hover {
+      box-shadow: 0 0 15px var(--accent);
+    }
+
+    .skill-card h3 {
+      display: flex;
+      justify-content: space-between;
+      color: #fff;
+      font-size: 1.1rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .progress {
+      background-color: #333;
+      border-radius: 10px;
+      height: 6px;
+      margin-bottom: 0.5rem;
+      overflow: hidden;
+    }
+
+    .progress-bar {
+      background-color: var(--accent);
+      height: 100%;
+    }
+
+    .skill-card p {
+      color: var(--muted);
+      font-size: 0.85rem;
+    }
+
+    /* Additional Expertise Styles */
+    .additional-expertise {
+      margin-top: 4rem;
+      text-align: center;
+    }
+
+    .additional-expertise h1 {
+      margin-bottom: 2rem;
+      color: var(--accent);
+    }
+
+    .additional-expertise .cards-container {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .additional-expertise .card {
+      background-color: var(--secondary);
+      border-radius: 8px;
+      padding: 1.5rem;
+      width: 250px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      transition: transform 0.3s ease;
+    }
+
+    .additional-expertise .card:hover {
+      transform: translateY(-5px);
+    }
+
+    .additional-expertise .card h3 {
+      margin-bottom: 0.705rem;
+      color: #fff;
+    }
+
+    .additional-expertise .card p {
+      color: var(--muted);
+      font-size: 0.9rem;
+      line-height: 1.5;
+    }
+
+    /* Featured Projects Styles */
+    .featured-projects {
+      margin-top: 4rem;
+      text-align: center;
+    }
+
+    .featured-projects h1 {
+      margin-bottom: 2rem;
+      color: var(--accent);
+    }
+
+    .project-card {
+      background-color: var(--secondary);
+      border-radius: 8px;
+      padding: 1.5rem;
+      margin: 1rem auto;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: left;
+      max-width: 600px;
+    }
+
+    .project-image-container {
+      width: 100%;
+      padding-top: 100%;
+      position: relative;
+      overflow: hidden;
+      border-radius: 8px;
+      margin-bottom: 1rem;
+    }
+
+    .project-image-container img {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .project-card h3 {
+      margin-bottom: 0.5rem;
+      color: #fff;
+    }
+
+    .project-card p {
+      color: var(--muted);
+      font-size: 0.9rem;
+      line-height: 1.5;
+      margin-bottom: 1rem;
+    }
+
+    .technologies {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .technologies span {
+      background-color: var(--accent);
+      padding: 0.25rem 0.5rem;
+      border-radius: 4px;
+      font-size: 0.8rem;
+    }
+
+    .key-features {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .key-features span {
+      background-color: rgba(59, 130, 246, 0.2);
+      padding: 0.25rem 0.5rem;
+      border-radius: 4px;
+      font-size: 0.8rem;
+      color: var(--accent);
+    }
+
+    .project-actions {
+      display: flex;
+      gap: 1rem;
+    }
+
+    .project-actions a {
+      color: var(--accent);
+      text-decoration: none;
+      font-weight: bold;
+    }
+    .project-actions a:hover {
+  color: white;
+  background-color: var(--accent);
+  padding: 0.5rem 0.5rem;
+  border-radius: 6px;
+  transition: all 0.3s ease;
+}
+
+
+    /* Get In Touch Styles */
+    .get-in-touch {
+      margin-top: 4rem;
+      padding: 2rem;
+      text-align: center;
+      background-color: var(--primary);
+    }
+
+    .get-in-touch h1 {
+      margin-bottom: 1rem;
+      color: var(--accent);
+    }
+
+    .get-in-touch p {
+      margin-bottom: 2rem;
+      color: var(--muted);
+    }
+
+    .contact-container {
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      flex-wrap: wrap;
+    }
+
+    .contact-information {
+      background-color: var(--secondary);
+      border-radius: 16px;
+      padding: 1.5rem;
+      width: 250px;
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+      height: fit-content;
+    }
+
+    .contact-information h3 {
+      margin-bottom: 1rem;
+      color: #fff;
+      text-align: left;
+    }
+
+    .contact-information p {
+      margin-bottom: 1rem;
+      color: var(--muted);
+      text-align: left;
+      display: flex;
+      align-items: center;
+    }
+
+    .contact-information i {
+      margin-right: 0.5rem;
+      color: var(--accent);
+    }
+
+    .social-links {
+      display: flex;
+      justify-content: flex-start;
+      margin-top: 1rem;
+      gap: 1rem;
+    }
+
+    .social-links a {
+      color: var(--accent);
+      font-size: 1.5rem;
+    }
+
+    .message-form {
+      background-color: var(--secondary);
+      border-radius: 16px;
+      padding: 1.5rem;
+      width: 350px;
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+    }
+
+    .message-form h3 {
+      margin-bottom: 1rem;
+      color: #fff;
+      text-align: left;
+    }
+
+    .form-group {
+      margin-bottom: 1rem;
+      text-align: left;
+    }
+
+    .form-group label {
+      display: block;
+      margin-bottom: 0.5rem;
+      color: var(--muted);
+    }
+
+    .form-group input, .form-group textarea {
+      width: 100%;
+      padding: 0.75rem;
+      border: 1px solid #4B5563;
+      border-radius: 8px;
+      background-color: var(--primary);
+      color: var(--text);
+    }
+
+    .form-group textarea {
+      height: 100px;
+      resize: vertical;
+    }
+
+    .submit-button {
+      background-color: var(--accent);
+      color: white;
+      border: none;
+      padding: 0.75rem;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: bold;
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+    }
+
+    .submit-button:hover {
+      background-color: #2563eb;
+    }
+  </style>
+</head>
+<body>
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="hero-content">
+      <h1>Hello, I'm Rik Danielle Argarin</h1>
+      <p>IT Graduate & Web Developer</p>
+      <p>Passionate about creating innovative web solutions with expertise in React, PHP, WordPress, and UI/UX design. Ready to transform ideas into digital experiences.</p>
+      <div class="hero-buttons">
+        <a href="#about">View My Work</a>
+        <a href="#contact">Get In Touch</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Main Content -->
+  <main>
+    <!-- About Me -->
+    <section id="about">
+      <h1>About Me</h1>
+      <p>As a recent IT graduate with practical internship experience, I bring a unique blend of academic knowledge and real-world application to web development. My journey includes working with modern technologies like React.js, WordPress, and PHP, while developing a keen eye for UI/UX design that ensures both functionality and aesthetic appeal.</p>
+      <div class="cards-container">
+        <div class="card">
+          <i class="fas fa-graduation-cap fa-3x"></i>
+          <h3>Education</h3>
+          <p>Bachelor of Science in Information Technology. Strong foundation in computer science principles and modern development practices.</p>
+        </div>
+        <div class="card">
+          <i class="fas fa-briefcase fa-3x"></i>
+          <h3>Professional Experience</h3>
+          <p>Internship at ValuCare Health Systems. Hands-on experience with WordPress, PHP, React.js, and internal system development.</p>
+        </div>
+        <div class="card">
+          <i class="fas fa-code fa-3x"></i>
+          <h3>Technical Projects</h3>
+          <p>Built comprehensive web applications including pharmacy e-commerce and car booking systems.</p>
+        </div>
+        <div class="card">
+          <i class="fas fa-palette fa-3x"></i>
+          <h3>Specializations</h3>
+          <p>Strong eye for design with expertise in Figma, responsive layouts, and user experience.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Certifications -->
+    <section>
+      <h1>Certifications</h1>
+      <div class="cards-container">
+        <div class="card">
+          <i class="fas fa-shield-alt fa-3x"></i>
+          <h3>Cyber Threat Management</h3>
+          <p>Cisco Networking Academy</p>
+        </div>
+        <div class="card">
+          <i class="fas fa-network-wired fa-3x"></i>
+          <h3>IT Specialist - Networking</h3>
+          <p>Certiport</p>
+        </div>
+        <div class="card">
+          <i class="fas fa-database fa-3x"></i>
+          <h3>Introduction to Data Science</h3>
+          <p>Cisco Networking Academy</p>
+        </div>
+        <div class="card">
+          <i class="fas fa-lock fa-3x"></i>
+          <h3>Introduction to Cybersecurity</h3>
+          <p>Cisco Networking Academy</p>
+        </div>
+        <div class="card">
+          <i class="fas fa-cloud fa-3x"></i>
+          <h3>IT Specialist - Cloud Computing</h3>
+          <p>Certiport</p>
+        </div>
+        <div class="card">
+          <i class="fas fa-user-shield fa-3x"></i>
+          <h3>IT Specialist - Cybersecurity</h3>
+          <p>Certiport</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Technical Skills -->
+    <section>
+      <h1>Technical Skills</h1>
+      <div style="display:flex; justify-content:space-around; flex-wrap:wrap; gap:2rem;">
+        <!-- Core Development Skills -->
+        <div style="flex:1; min-width:300px;">
+          <h2 style="color:#fff; text-align:center; margin-bottom:1.5rem;">Core Development Skills</h2>
+          <div class="skills-grid">
+            <div class="skill-card"><h3>HTML/CSS <span>95%</span></h3><div class="progress"><div class="progress-bar" style="width:95%;"></div></div><p>Frontend</p></div>
+            <div class="skill-card"><h3>JavaScript <span>90%</span></h3><div class="progress"><div class="progress-bar" style="width:90%;"></div></div><p>Frontend</p></div>
+            <div class="skill-card"><h3>React.js <span>85%</span></h3><div class="progress"><div class="progress-bar" style="width:85%;"></div></div><p>Frontend</p></div>
+            <div class="skill-card"><h3>PHP <span>80%</span></h3><div class="progress"><div class="progress-bar" style="width:80%;"></div></div><p>Backend</p></div>
+            <div class="skill-card"><h3>MySQL <span>85%</span></h3><div class="progress"><div class="progress-bar" style="width:85%;"></div></div><p>Database</p></div>
+            <div class="skill-card"><h3>WordPress <span>90%</span></h3><div class="progress"><div class="progress-bar" style="width:90%;"></div></div><p>CMS</p></div>
+          </div>
+        </div>
+        <!-- Tools & Technologies -->
+        <div style="flex:1; min-width:300px;">
+          <h2 style="color:#fff; text-align:center; margin-bottom:1.5rem;">Tools & Technologies</h2>
+          <div class="skills-grid">
+            <div class="skill-card"><h3>Figma <span>88%</span></h3><div class="progress"><div class="progress-bar" style="width:88%;"></div></div><p>Design</p></div>
+            <div class="skill-card"><h3>Git <span>85%</span></h3><div class="progress"><div class="progress-bar" style="width:85%;"></div></div><p>Version Control</p></div>
+            <div class="skill-card"><h3>Bootstrap <span>90%</span></h3><div class="progress"><div class="progress-bar" style="width:90%;"></div></div><p>Framework</p></div>
+            <div class="skill-card"><h3>Photoshop <span>75%</span></h3><div class="progress"><div class="progress-bar" style="width:75%;"></div></div><p>Design</p></div>
+            <div class="skill-card"><h3>VS Code <span>95%</span></h3><div class="progress"><div class="progress-bar" style="width:95%;"></div></div><p>Tools</p></div>
+            <div class="skill-card"><h3>XAMPP <span>85%</span></h3><div class="progress"><div class="progress-bar" style="width:85%;"></div></div><p>Development</p></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Additional Expertise -->
+    <section class="additional-expertise">
+      <h1>Additional Expertise</h1>
+      <div class="cards-container">
+        <div class="card">
+          <h3>UI/UX Design</h3>
+          <p>Strong eye for design with focus on user experience and responsive layouts.</p>
+        </div>
+        <div class="card">
+          <h3>Project Management</h3>
+          <p>Experience managing development workflows and collaborating with teams.</p>
+        </div>
+        <div class="card">
+          <h3>Problem Solving</h3>
+          <p>Analytical thinking and creative problem-solving for complex technical challenges.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Featured Projects -->
+    <section class="featured-projects">
+      <h1>Featured Projects</h1>
+      <div class="project-card">
+        <div class="project-image-container">
+          <img src="img/project1.jfif" alt="E-commerce Pharmacy Website">
+        </div>
+         <h3>Salengga Lawfirm Booking System</h3>
+<p>
+  A web-based appointment and scheduling platform developed for Salengga Law Firm to manage client consultations efficiently. The system allows clients to view available time slots, book appointments with specific lawyers, and receive confirmations. Admins can manage bookings, lawyer availability, and client data through a secure dashboard.
+</p>
+
+<div class="technologies">
+  <span>HTML</span>
+  <span>CSS</span>
+  <span>JavaScript</span>
+  <span>PHP</span>
+  <span>MySQL</span>
+  <span>Bootstrap</span>
+</div>
+
+<div class="key-features">
+  <span>Client Appointment Booking</span>
+  <span>Lawyer Schedule Management</span>
+  <span>Admin Dashboard</span>
+  <span>Email Notifications</span>
+  <span>User Authentication & Roles</span>
+  <span>Responsive Design</span>
+</div>
+
+        <div class="project-actions">
+          <a href="#">Live Demo</a>
+          <a href="https://github.com/itsnotrik/Law-Firm-Website-HTML-PHP-CSS-">Source Code</a>
+        </div>
+      </div>
+      <div class="project-card">
+        <div class="project-image-container">
+          <img src="img/project2.jpg" alt="Car Care Booking & Inventory System">
+        </div>
+        <h3>Client Appointment Scheduler</h3>
+<p>
+  A desktop-based appointment scheduling application developed in C++ for managing client bookings efficiently. The system allows users to add, view, update, and delete appointment records. It features time conflict checks, a simple file-based data storage system, and a console-based user interface designed for ease of use in small office environments.
+</p>
+
+<div class="technologies">
+  <span>C++</span>
+  <span>File Handling</span>
+  <span>Object-Oriented Programming (OOP)</span>
+</div>
+
+<div class="key-features">
+  <span>Appointment Booking & Cancellation</span>
+  <span>Conflict Detection for Time Slots</span>
+  <span>Search & Filter Appointments</span>
+  <span>File-Based Data Persistence</span>
+  <span>Console-Based User Interface</span>
+</div>
+
+        <div class="project-actions">
+          <a href="#">Live Demo</a>
+          <a href="https://github.com/itsnotrik/Client-Appointment-Scheduler-C-">Source Code</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Get In Touch -->
+    <section id="contact" class="get-in-touch">
+      <h1>Get In Touch</h1>
+      <p>I'm always interested in new opportunities and exciting projects. Whether you're looking for a developer to join your team or need help with a web development project, I'd love to hear from you.</p>
+      <div class="contact-container">
+        <div class="contact-information">
+          <h3>Contact Information</h3>
+          <p><i class="fas fa-envelope"></i> iamrikcurry@gmail.com</p>
+          <p><i class="fas fa-phone"></i> 09777003854</p>
+          <p><i class="fas fa-map-marker-alt"></i> Makati City</p>
+          <h3>Follow me on:</h3>
+          <div class="social-links">
+            <a href="https://www.linkedin.com/in/rik-danielle-argarin-9143282aa/"><i class="fab fa-linkedin"></i></a>
+            <a href="https://github.com/itsnotrik"><i class="fab fa-github"></i></a>
+            <a href="https://x.com/itsnotrik"><i class="fab fa-twitter"></i></a>
+          </div>
+          <br>
+          <h3>Download my CV:</h3> 
+          <div class="social-links">
+            <a href="https://drive.google.com/file/d/1B7-2bJgfbPf8yyBhfvaKy8U-Un2CstO2/view?usp=sharing" target="_blank"><i class="fas fa-file-pdf"></i></a>
+          </div>
+        </div>
+        <div class="message-form">
+          <h3>Send Me a Message</h3>
+          <form>
+            <div class="form-group">
+              <label for="full-name">Full Name</label>
+              <input type="text" id="full-name" name="full-name" placeholder="Full name">
+            </div>
+            <div class="form-group">
+              <label for="email-address">Email Address</label>
+              <input type="email" id="email-address" name="email-address" placeholder="Enter your email address">
+            </div>
+            <div class="form-group">
+              <label for="subject">Subject</label>
+              <input type="text" id="subject" name="subject" placeholder="What's this about?">
+            </div>
+            <div class="form-group">
+              <label for="message">Message</label>
+              <textarea id="message" name="message" placeholder="Tell me about your project or opportunity..."></textarea>
+            </div>
+            <button type="submit" class="submit-button">
+              <i class="fas fa-paper-plane"></i> Send Message
+            </button>
+          </form>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    &copy; 2025 Rik Danielle Argarin. All rights reserved.
+  </footer>
+
+  <script>
+    document.querySelectorAll('.hero-buttons a').forEach(anchor => {
+      anchor.addEventListener('click', function(e) {
+        e.preventDefault();
+        const targetId = this.getAttribute('href');
+        const targetSection = document.querySelector(targetId);
+        targetSection.scrollIntoView({
+          behavior: 'smooth'
+        });
+      });
+    });
+  </script>
+</body>
+</html>
